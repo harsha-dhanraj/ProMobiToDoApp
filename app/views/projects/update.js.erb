@@ -1,6 +1,7 @@
 <% if @error %>
 	alert("<%= @message %>")
-<% else %>	
+<% else %>
+alert("Project Updated Successfully")	
 $('.project-list').html("<%= j render 'index' %>");
 $('.project-list #developers').chosen({
 	width: '200px'
