@@ -5,6 +5,13 @@
 	  <%= stylesheet_link_tag    'admin', media: 'all' %>
 	  <%= javascript_include_tag 'admin' %>	  
 	  <%= csrf_meta_tags %>	  
+	  <script type="text/javascript">
+		$(function() {
+		  $(".spinner").fadeOut(100, function() {
+		    $(".content").show();        
+		  });
+		});
+	  </script>
 	</head>
 	<body>
 		<nav class="navbar navbar-default navbar-static-top">
@@ -17,7 +24,7 @@
 						<span class="icon-bar"></span>
 					</button>
 					<a class="navbar-brand" href="https://promobitech.com/" target="_blank">
-						ProMobi Technologies Pvt.Ltd
+						ProMobi Technologies Pvt. Ltd.
 					</a>
 					<%= render partial: "shared/flash_messages", flash: flash %>
 				</div>
@@ -26,7 +33,7 @@
 					<ul class="nav navbar-nav navbar-right">						
 						<li class="dropdown ">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-								<%= current_user.type %>
+								<%= current_user.name %> (<%= current_user.type %>)
 								<span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
 								<li class=""><a href="<%= edit_user_registration_path %>">Change Password</a></li>
@@ -47,6 +54,9 @@
 					<li class="<%= 'active' if (controller?('projects') && action?('analytics')) %>"><a href="<%= analytics_projects_path %>">Analytics</a></li>					
 				</ul>
 			</div>
+			<div class="spinner" style="width:100px;height: 100px;position: fixed;top: 50%;left: 50%;z-index: 99999999999;">
+              <i class= "fa fa-circle-o-notch fa-spin fa-4x" style="color: #228Ae6;"></i>
+            </div>
 			<div class="col-md-10 content">				
 				<%= yield %>	            
 			</div>			

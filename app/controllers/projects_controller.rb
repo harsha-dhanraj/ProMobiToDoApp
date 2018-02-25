@@ -1,4 +1,7 @@
 class ProjectsController < ApplicationController
+  
+  before_action :authenticate_user!
+
   before_action :set_project, only: [:show, :edit, :update, :destroy]
 
   load_and_authorize_resource
@@ -134,7 +137,7 @@ class ProjectsController < ApplicationController
       @data << [status, count]
       @accordian_data << [status, todos.flatten]
     end
-    
+
     # ****************************
     # Output data formats
     # @data => [["Status", "Project Count"], ["New", 0], ["Done", 0], ["In Progress", 0]]

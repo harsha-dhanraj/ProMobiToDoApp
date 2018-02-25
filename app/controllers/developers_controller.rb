@@ -1,5 +1,7 @@
 class DevelopersController < ApplicationController
-	# layout 'developer'
+	
+  before_action :authenticate_user!
+
 	authorize_resource :class => false
 	
   def index

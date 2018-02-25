@@ -1,6 +1,9 @@
 class ProjectManagersController < ApplicationController
-  # layout 'admin'
+  
+  before_action :authenticate_user!
+
   authorize_resource :class => false
+
   def add_developer    
   	@developers = current_user.developers
     respond_to do |format|
@@ -25,9 +28,17 @@ class ProjectManagersController < ApplicationController
   def update_developer
   	@developer = current_user.developers.find(params[:id])
   	@error = false
+    email_changed = false
   	attributes = {:first_name => params[:first_name],:last_name => params[:last_name],:email => params[:email]}
+    if (@developer.email != params[:email])
+      @developer.confirmed_at = nil
+      @developer.password = "1234test"
+      @developer.password_confirmation = "1234test"
+      email_changed = true
+    end
   	if @developer.update(attributes)  		
   		@developers = current_user.developers
+      @developer.send_confirmation_instructions if email_changed
   	else
   		@error = true
   	end
