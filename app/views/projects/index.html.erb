@@ -9,35 +9,43 @@
     Project Status By Developer
   </div>
   <div class="panel-body">
-    <table class="table table-bordered table-striped">
-      <thead>
-        <tr>
-          <th class="align-center-middle">Status</th>
-          <% @user_ids.each do |id| %>
-            <% u = current_user.developers.find(id) %>
-            <th class="align-center-middle"><%= u.first_name %></th>
-          <% end %>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @status_data.each do |k,v| %>
+    <% if @status_data["Done"].empty? && @status_data["New"].empty? && @status_data["In Progress"].empty? %>
+      <p style="text-align: center;">
+        <span style="color: red;font-size: 20px;">
+          Currently, there is no data to display
+        </span>
+      </p>
+    <% else %>
+      <table class="table table-bordered table-striped">
+        <thead>
           <tr>
-            <td class="align-center-middle"><%= k %></td> 
+            <th class="align-center-middle">Status</th>
             <% @user_ids.each do |id| %>
-              <td class="align-center-middle">
-              <% @status_data[k][id].each do |todo| %>
-                <%= todo %>
-                <% if todo != @status_data[k][id].last %>
-                <hr>
-                <% end %>
-              <% end %>
-              </td>            
+              <% u = current_user.developers.find(id) %>
+              <th class="align-center-middle"><%= u.first_name %></th>
             <% end %>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+
+        <tbody>
+          <% @status_data.each do |k,v| %>
+            <tr>
+              <td class="align-center-middle"><%= k %></td> 
+              <% @user_ids.each do |id| %>
+                <td class="align-center-middle">
+                <% @status_data[k][id].each do |todo| %>
+                  <%= todo %>
+                  <% if todo != @status_data[k][id].last %>
+                  <hr>
+                  <% end %>
+                <% end %>
+                </td>            
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
   </div>
 </div>
 
@@ -46,34 +54,42 @@
     Project Status By Project
   </div>
   <div class="panel-body">
-    <table class="table table-bordered table-striped">
-      <thead>
-        <tr>
-          <th class="align-center-middle">Status</th>
-          <% @project_ids.each do |id| %>
-            <% p = current_user.projects.find(id) %>
-            <th class="align-center-middle"><%= p.name %></th>
-          <% end %>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @project_status_data.each do |k,v| %>
+    <% if @project_status_data["Done"].empty? && @project_status_data["New"].empty? && @project_status_data["In Progress"].empty? %>
+      <p style="text-align: center;">
+        <span style="color: red;font-size: 20px;">
+          Currently, there is no data to display
+        </span>
+      </p>
+    <% else %>
+      <table class="table table-bordered table-striped">
+        <thead>
           <tr>
-            <td class="align-center-middle"><%= k %></td> 
+            <th class="align-center-middle">Status</th>
             <% @project_ids.each do |id| %>
-              <td class="align-center-middle">
-              <% @project_status_data[k][id].each do |todo| %>
-                <%= todo %>
-                <% if todo != @project_status_data[k][id].last %>
-                <hr>
-                <% end %>
-              <% end %>
-              </td>            
+              <% p = current_user.projects.find(id) %>
+              <th class="align-center-middle"><%= p.name %></th>
             <% end %>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+
+        <tbody>
+          <% @project_status_data.each do |k,v| %>
+            <tr>
+              <td class="align-center-middle"><%= k %></td> 
+              <% @project_ids.each do |id| %>
+                <td class="align-center-middle">
+                <% @project_status_data[k][id].each do |todo| %>
+                  <%= todo %>
+                  <% if todo != @project_status_data[k][id].last %>
+                  <hr>
+                  <% end %>
+                <% end %>
+                </td>            
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
   </div>
 </div>

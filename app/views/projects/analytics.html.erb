@@ -21,7 +21,15 @@
     Project Status
   </div>
   <div class="panel-body">
-    <div id="piechart_3d" style="width: 900px; height: 500px;"></div> 
+    <% if (@data[1][1] == 0) && (@data[2][1] == 0) && (@data[3][1] == 0) %>
+      <p style="text-align: center;">
+        <span style="color: red;font-size: 20px;">
+          Currently, there is no data to display graph
+        </span>
+      </p>
+    <% else %>
+      <div id="piechart_3d" style="width: 900px; height: 500px;"></div> 
+    <% end %>
   </div>
 </div>
 <div class="panel panel-default project-status">
@@ -43,27 +51,35 @@
               </div>
               <div id="<%= data[0].split(' ').join() %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="<%= index %>">
                 <div class="panel-body">
-                  <table class="table table-bordered table-striped">
-                    <thead>
-                      <tr>
-                        <th style="text-align: center;">Project</th>
-                        <th style="text-align: center;">Task</th>
-                        <th style="text-align: center;">Status</th>
-                        <th style="text-align: center;">Developer</th>
-                      </tr>
-                    </thead>
-
-                    <tbody>
-                      <% data[1].each do |todo| %>
+                  <% if data[1].empty? %>
+                    <p style="text-align: center;">
+                      <span style="color: red;font-size: 20px;">
+                        Currently, there is no data to display.
+                      </span>
+                    </p>
+                  <% else %>
+                    <table class="table table-bordered table-striped">
+                      <thead>
                         <tr>
-                          <td style="text-align: center;"><%= todo.project.name %></td>
-                          <td style="text-align: center;"><%= todo.task %></td>
-                          <td style="text-align: center;"><%= todo.status %></td>                
-                          <td style="text-align: center;"><%= todo.developer.first_name %></td>
+                          <th style="text-align: center;">Project</th>
+                          <th style="text-align: center;">Task</th>
+                          <th style="text-align: center;">Status</th>
+                          <th style="text-align: center;">Developer</th>
                         </tr>
-                      <% end %>
-                    </tbody>
-                  </table>
+                      </thead>
+
+                      <tbody>
+                        <% data[1].each do |todo| %>
+                          <tr>
+                            <td style="text-align: center;"><%= todo.project.name %></td>
+                            <td style="text-align: center;"><%= todo.task %></td>
+                            <td style="text-align: center;"><%= todo.status %></td>                
+                            <td style="text-align: center;"><%= todo.developer.first_name %></td>
+                          </tr>
+                        <% end %>
+                      </tbody>
+                    </table>
+                  <% end %>
                 </div>
               </div>
           </div>

@@ -3,16 +3,13 @@ class ProjectsController < ApplicationController
 
   load_and_authorize_resource
 
-  
-
   def index
     @projects = current_user.projects.includes(:todos)
     todos = Todo.all
     @status_data = {}
     @project_status_data = {}
     @developers = current_user.developers.includes(:todos)
-    # projects = current_user.projects.includes(:todos)
-    ["Done","In Progress","New"].each do |status|
+    ["New","Done","In Progress"].each do |status|
       @status_data[status] = {}
       @developers.each do |developer|
         @status_data[status][developer.id] = []
@@ -21,39 +18,40 @@ class ProjectsController < ApplicationController
         end
       end
       @project_status_data[status] = {}
-      @projects.each do |project|
-        puts "@project_status_data[status]=> #{@project_status_data[status].inspect}"
+      @projects.each do |project|        
         @project_status_data[status][project.id] = []
         project.todos.each do |todo|
           @project_status_data[status][project.id] << todo.task if todo.status == status
         end
       end
-    end
-    
-    puts "@status_data => #{@status_data.inspect}"
-    puts "@project_status_data => #{@project_status_data.inspect}"
+    end      
 
+    # Table header fetched from user_ids in view
     @user_ids = []
-    @status_data.values.each do |v|
-      # puts "v => #{v.inspect}"
+    @status_data.values.each do |v|      
       @user_ids << v.keys
     end
 
+    # Table header fetched from project_ids in view
     @project_ids = []
-    @project_status_data.values.each do |v|
-      # puts "v => #{v.inspect}"
+    @project_status_data.values.each do |v|      
       @project_ids << v.keys
     end
 
     @user_ids = @user_ids.flatten.reject(&:blank?).uniq
     @project_ids = @project_ids.flatten.reject(&:blank?).uniq
 
-    puts "User Ids => #{@user_ids.inspect}"
-
+    # ****************************
+    # Output data formats
+    # @status_data => {"Done"=>{2=>[], 3=>[], 4=>[], 5=>[], 6=>[], 7=>[], 8=>[]}, "In Progress"=>{2=>[], 3=>[], 4=>[], 5=>[], 6=>[], 7=>[], 8=>[]}, "New"=>{2=>[], 3=>[], 4=>[], 5=>[], 6=>[], 7=>[], 8=>[]}}
+    # @project_status_data => {"Done"=>{}, "In Progress"=>{}, "New"=>{}}
+    # User Ids => [2, 3, 4, 5, 6, 7, 8]
+    # Project Ids => []
+    # ****************************
+  
+    # puts "User Ids => #{@user_ids.inspect}"
+    # puts "Project Ids => #{@project_ids.inspect}"
     
-    # @status = Todo.all.group_by{|todo| [todo.status, todo.developer.first_name]}
-    # @developers = @status.keys.map{|s| s[1]}
-    # respond_with(@projects)
     respond_to do |format|
       format.html
     end
@@ -66,7 +64,7 @@ class ProjectsController < ApplicationController
   def new
     @project = Project.new
     @projects = current_user.projects
-    # respond_with(@project)
+    
     respond_to do |format|
       format.html
     end
@@ -136,9 +134,15 @@ class ProjectsController < ApplicationController
       @data << [status, count]
       @accordian_data << [status, todos.flatten]
     end
+    
+    # ****************************
+    # Output data formats
+    # @data => [["Status", "Project Count"], ["New", 0], ["Done", 0], ["In Progress", 0]]
+    # @accordian_data => [["New", []], ["Done", []], ["In Progress", []]]
+    # ****************************
 
-    puts "DATA => #{@data.inspect}"
-    puts "ACCORDIAN DATA => #{@accordian_data.inspect}"
+    # puts "DATA => #{@data.inspect}"
+    # puts "ACCORDIAN DATA => #{@accordian_data.inspect}"
   end
 
   private

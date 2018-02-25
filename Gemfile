@@ -21,6 +21,7 @@ gem "font-awesome-rails"
 gem "nested_form"
 gem 'chosen-rails'
 gem 'cancancan', '~> 1.10'
+gem 'figaro'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
