@@ -34,7 +34,7 @@
               <td><%= project.name %></td>
               <td><%= project.description %></td>
               <td><%= project.client %></td>
-              <td style="text-align: center;"><%= link_to "<i class='fa fa-eye'></i> View".html_safe, project, :title => "View", :class=>"btn btn-info btn-sm" %>
+              <td style="text-align: center;"><%#= link_to "<i class='fa fa-eye'></i> View".html_safe, project, :title => "View", :class=>"btn btn-info btn-sm" %>
               <%= link_to "<i class='fa fa-pencil'></i> Edit".html_safe, edit_project_path(project), :title => "Edit", :class=>"btn btn-primary btn-sm", :remote => true %>
               <%= link_to "<i class='fa fa-trash'></i> Delete".html_safe, project, method: :delete, data: { confirm: 'Are you sure?' }, :title => "Delete", :class=>"btn btn-danger btn-sm", :remote => true %>
               <% if !project.users.empty? %>
