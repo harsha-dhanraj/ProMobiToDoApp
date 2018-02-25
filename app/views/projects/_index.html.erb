@@ -38,7 +38,7 @@
               <%= link_to "<i class='fa fa-pencil'></i> Edit".html_safe, edit_project_path(project), :title => "Edit", :class=>"btn btn-primary btn-sm", :remote => true %>
               <%= link_to "<i class='fa fa-trash'></i> Delete".html_safe, project, method: :delete, data: { confirm: 'Are you sure?' }, :title => "Delete", :class=>"btn btn-danger btn-sm", :remote => true %>
               <% if !project.users.empty? %>
-              <%= link_to "<i class='fa fa-list'></i> Create ToDo".html_safe, edit_project_path(project), :title => "Edit", :class=>"btn btn-primary btn-sm", :target=> "_blank" %>
+              <%= link_to "<i class='fa fa-list'></i> Manage ToDo".html_safe, edit_project_path(project), :title => "Edit", :class=>"btn btn-primary btn-sm", :target=> "_blank" %>
               <% end %>
               </td>
             </tr>

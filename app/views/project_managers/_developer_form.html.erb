@@ -20,7 +20,10 @@
         </div>
         <div class="form-group">
           <div class="col-md-offset-3 col-md-6">
-            <%= submit_tag "#{@developer.nil? ? 'Save' : 'Update'}", :id=>"btn-signup", :class=>"btn btn-info" %>
+            <%#= submit_tag "#{@developer.nil? ? 'Save' : 'Update'}", :id=>"btn-signup", :class=>"btn btn-info" %>
+            <%= button_tag "Save",:class=>"btn btn-info btn-trans btn-sm", :style => "margin-top:4px;", :data => {:disable_with => "<i class='fa fa-spinner fa-spin'></i>".html_safe} do %>
+              <i class='fa fa-floppy-o'></i> <%= @developer.nil? ? ' Save' : ' Update' %>
+            <% end %>
           </div>
         </div>                                                              
       <% end %>

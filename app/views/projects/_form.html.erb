@@ -26,7 +26,10 @@
     <%= select_tag :developers, options_for_select(current_user.developers.map{|d| [d.name, d.id]}, :selected=>@project.users.pluck(:id)),{:multiple => true, :prompt => "Please Select",:class=>"chosen-select form-control" } %>
   </div>
   <div class="actions form-group col-md-1">
-    <%= f.submit "#{@project.new_record? ? 'Save' : 'Update'}", :class => "btn btn-primary btn-sm" %>
+    <%#= f.submit "#{@project.new_record? ? 'Save' : 'Update'}", :class => "btn btn-primary btn-sm" %>
+    <%= f.button "Save", :class=>"btn btn-primary btn-sm", :data => {disable_with: "<i class='fa fa-spinner fa-spin'></i>".html_safe } do%>
+     <i class='fa fa-floppy-o'></i><%= @project.new_record? ? ' Save' : ' Update' %>
+    <% end %>
   </div>
   <!-- <button type="submit" class="btn btn-default">Submit</button> -->
 <% end %>

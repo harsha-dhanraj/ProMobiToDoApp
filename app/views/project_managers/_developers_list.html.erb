@@ -20,17 +20,15 @@
               <th colspan="3" style="text-align: center;">Action</th>
             </tr>
           </thead>
-
           <tbody>
             <% @developers.each do |developer| %>
               <tr>
                 <td><%= developer.first_name %></td>
                 <td><%= developer.last_name %></td>
                 <td><%= developer.email %></td>
-                <td style="text-align: center;"><%#= link_to "<i class='fa fa-eye'></i> View".html_safe, "#", :title => "View", :class=>"btn btn-info btn-sm" %>
+                <td style="text-align: center;">
                 <%= link_to "<i class='fa fa-pencil'></i> Edit".html_safe, edit_developer_project_manager_path(developer), :title => "Edit", :class=>"btn btn-primary btn-sm", :remote => true %>
-                <%= link_to "<i class='fa fa-trash'></i> Delete".html_safe, delete_developer_project_manager_path(developer), method: :delete, data: { confirm: 'Are you sure?' }, :title => "Delete", :class=>"btn btn-danger btn-sm", :remote => true %>
-                <%#= link_to "<i class='fa fa-list'></i> Create ToDo".html_safe, "#", :title => "Edit", :class=>"btn btn-primary btn-sm", :target=> "_blank" %>
+                <%= link_to "<i class='fa fa-trash'></i> Delete".html_safe, delete_developer_project_manager_path(developer), method: :delete, data: { confirm: 'Are you sure?' }, :title => "Delete", :class=>"btn btn-danger btn-sm", :remote => true %>                
                 </td>
               </tr>
             <% end %>
