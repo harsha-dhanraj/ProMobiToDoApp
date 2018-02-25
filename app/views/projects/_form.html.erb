@@ -1,0 +1,32 @@
+<%= form_for(@project, :remote => true, :html=>{:class => "form-inline"}) do |f| %>
+  <% if @project.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
+
+      <ul>
+      <% @project.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-group col-md-3">
+    <!-- <label for="name">Name</label> -->
+    <%= f.text_field :name, :class=>"form-control", :placeholder => "Project Name", :style => "width:100%;", :required => true %>    
+  </div>
+  <div class="form-group col-md-2">
+    <!-- <label for="description">Description</label> -->
+    <%= f.text_area :description, :class=>"form-control", :placeholder => "Project Description", :style => "width:100%;", :required => true %>
+  </div>
+  <div class="form-group col-md-3">
+    <!-- <label for="client">Client</label> -->
+    <%= f.text_field :client, :class=>"form-control", :placeholder => "Client Name", :style => "width:100%;", :required => true %>
+  </div>
+  <div class="form-group col-md-3">
+    <%= select_tag :developers, options_for_select(current_user.developers.map{|d| [d.name, d.id]}, :selected=>@project.users.pluck(:id)),{:multiple => true, :prompt => "Please Select",:class=>"chosen-select form-control" } %>
+  </div>
+  <div class="actions form-group col-md-1">
+    <%= f.submit "#{@project.new_record? ? 'Save' : 'Update'}", :class => "btn btn-primary btn-sm" %>
+  </div>
+  <!-- <button type="submit" class="btn btn-default">Submit</button> -->
+<% end %>

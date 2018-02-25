@@ -1,0 +1,7 @@
+// alert("<%= @error %>")
+$('.developers-list').html("<%= j render 'developers_list' %>")
+$(".developer-form #first_name").val('')
+$(".developer-form #last_name").val('')
+$(".developer-form #email").val('')
+$('.add-edit-developer').text('Add New Developer')
+$('.developer-form #add-edit-developer-form').attr('action', "<%= create_developer_project_managers_path %>");

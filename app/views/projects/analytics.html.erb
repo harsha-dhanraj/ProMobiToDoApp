@@ -1,0 +1,110 @@
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {        
+        var data = google.visualization.arrayToDataTable(<%= raw @data.to_json %>);
+
+        var options = {
+          title: 'Project Status',
+          is3D: true,
+          pieSliceText: 'label',             
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data, options);
+      }
+    </script>
+    
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Project Status
+  </div>
+  <div class="panel-body">
+    <div id="piechart_3d" style="width: 900px; height: 500px;"></div> 
+  </div>
+</div>
+<div class="panel panel-default project-status">
+  <div class="panel-heading">
+    Project Status Details
+  </div>
+  <div class="panel-body">
+    <div class="container" style="width: 100% !important;">    
+      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+          <% @accordian_data.each_with_index do |data,index| %>
+          <div class="panel panel-default demo">
+              <div class="panel-heading" role="tab" id="<%= index %>">
+                  <h4 class="panel-title">
+                      <a role="button" data-toggle="collapse" data-parent="#accordion" href="#<%= data[0].split(' ').join() %>" aria-expanded="true" aria-controls="<%= data[0] %>">
+                          <i class="move-right fa fa-plus"></i>
+                          <%= data[0] %> Todos
+                      </a>
+                  </h4>
+              </div>
+              <div id="<%= data[0].split(' ').join() %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="<%= index %>">
+                <div class="panel-body">
+                  <table class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th style="text-align: center;">Project</th>
+                        <th style="text-align: center;">Task</th>
+                        <th style="text-align: center;">Status</th>
+                        <th style="text-align: center;">Developer</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <% data[1].each do |todo| %>
+                        <tr>
+                          <td style="text-align: center;"><%= todo.project.name %></td>
+                          <td style="text-align: center;"><%= todo.task %></td>
+                          <td style="text-align: center;"><%= todo.status %></td>                
+                          <td style="text-align: center;"><%= todo.developer.first_name %></td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+          </div>
+          <% end %>          
+      </div><!-- panel-group -->        
+    </div><!-- container -->
+  </div>
+</div>
+
+<style type="text/css">
+ 
+    .panel-group .panel {
+        border-radius: 0;
+        box-shadow: none;
+        border-color: #EEEEEE;
+    }
+
+    .demo > .panel-heading {
+        padding: 0;
+        border-radius: 0;
+        color: #212121;
+        background-color: #FAFAFA;
+        border-color: #EEEEEE;
+    }
+
+    .panel-title {
+        font-size: 14px;
+    }
+
+    .panel-title > a {
+        display: block;
+        padding: 15px;
+        text-decoration: none;
+    }
+
+    .move-right {
+        float: right;
+        color: #212121;
+    }
+
+    .panel-default > .panel-heading + .panel-collapse > .panel-body {
+        border-top-color: #EEEEEE;
+    }
+</style>

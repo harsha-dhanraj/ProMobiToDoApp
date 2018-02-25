@@ -1,0 +1,12 @@
+<% if @error %>
+	alert("<%= @message %>")
+<% else %>
+	alert("success")
+$('.project-list').html("<%= j render 'index' %>");
+$('.project-list #developers').chosen({
+	width: '200px'
+});
+$('.project-list #project_name').val('')
+$('.project-list #project_description').val('')
+$('.project-list #project_client').val('')
+<% end %>

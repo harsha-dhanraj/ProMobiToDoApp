@@ -1,0 +1,102 @@
+<style type="text/css">
+	.alert-labeled{
+  padding: 0px;
+}
+
+.alert-labeled-row{
+    display: table-row;
+    padding: 0px;
+}
+
+.alert-labelled-cell{
+    padding: 10px;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.alert-labeled .close > *{
+    padding:10px;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.alert-label{
+    vertical-align: middle;    
+    width: auto;
+    padding: 10px 15px;
+    height: 100%;
+    font-size:1.1em;
+    color:white;
+}
+
+.alert-success {
+    color: #3c763d;
+    background-color: white !important; 
+    border-color: #d6e9c6;
+}
+
+.alert-danger {
+    color: #a94442;
+    background-color: white !important;
+    border-color: #ebccd1;
+}
+
+.alert-notice {
+    color: #3c763d;
+    background-color: white !important; 
+    border-color: #d6e9c6;
+}
+
+.alert-warning {
+    color: #8a6d3b;
+    background-color: white;
+    border-color: #faebcc;
+}
+
+.alert-label-success{
+	background: #27B6AF;
+}
+.alert-label-notice{
+	background: #27B6AF;
+}
+.alert-label-error{
+	background: #d9534f;
+}
+.alert-label-alert{
+	/*background: #f0ad4e;*/
+    background: #d9534f;
+}
+.alert{
+    margin-bottom: 0px !important;
+}
+</style>
+<% flash.each do |type, message| %>
+    <div class="alert <%= alert_class_for(type) %> alert-labeled" style = "z-index:-1;float: right;margin-left: 200px;">
+		<button type="button" class="close" data-dismiss="alert">
+			<span aria-hidden="true">×</span><span class="sr-only">Close</span>
+		</button>
+        <div class="alert-labeled-row">
+            <span class="alert-label alert-label-<%= type %> alert-label-left alert-labelled-cell">                        
+                <% if type == "notice" %>
+			     <i class='fa fa-check'></i> 
+			    <% elsif type == "alert" %>
+			     <i class='fa fa-exclamation-triangle'></i> 
+			    <% elsif type == "error" %>
+			     <i class="fa fa-exclamation-triangle"></i>
+			    <% elsif type == "success" %>
+			     <i class='fa fa-check'></i>     
+				<% end %>
+            </span>
+            <p class="alert-body alert-body-right alert-labelled-cell">
+                
+                    <ul>                    
+                        <% message.split("<br/>").reject(&:blank?).each do |m| %>
+                            <li style="line-height: 2.5;margin-left: -35px;list-style-type: none;"><%= m %></li>
+                        <% end %>
+                    </ul>
+                
+            </p>
+        </div>
+
+    </div> 
+<% end %>

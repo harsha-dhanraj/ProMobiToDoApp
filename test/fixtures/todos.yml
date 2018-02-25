@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  task: MyString
+  project_id: 1
+  project_developer_id: 1
+
+two:
+  task: MyString
+  project_id: 1
+  project_developer_id: 1
