@@ -1,5 +1,7 @@
 class DevelopersController < ApplicationController
-	include DevelopersHelper
+	
+  include DevelopersHelper
+
   before_action :authenticate_user!
 
 	authorize_resource :class => false

@@ -12,8 +12,7 @@
     end
     %>
      alert-dismissible" role="alert">
-    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-    <%#= content %>
+    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>    
     <% content.split("<br/>").reject(&:blank?).each do |m| %>
         <li style="line-height: 2.5;margin-left: -35px;list-style-type: none;"><%= m %></li>
     <% end %>

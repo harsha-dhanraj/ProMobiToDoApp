@@ -1,0 +1,1 @@
+$(document).ready(function(){$(".main-table").clone(!0).appendTo("#table-scroll").addClass("clone"),$(".main-table-1").clone(!0).appendTo("#table-scrolll").addClass("clone")});

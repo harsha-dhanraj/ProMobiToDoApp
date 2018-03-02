@@ -1,20 +1,20 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load("current", {packages:["corechart"]});
-      google.charts.setOnLoadCallback(drawChart);
-      function drawChart() {        
-        var data = google.visualization.arrayToDataTable(<%= raw @data.to_json %>);
+<script type="text/javascript">
+  google.charts.load("current", {packages:["corechart"]});
+  google.charts.setOnLoadCallback(drawChart);
+  function drawChart() {        
+    var data = google.visualization.arrayToDataTable(<%= raw @data.to_json %>);
 
-        var options = {
-          title: 'Project Status',
-          is3D: true,
-          pieSliceText: 'label',             
-        };
+    var options = {
+      title: 'Project Status',
+      is3D: true,
+      pieSliceText: 'label',             
+    };
 
-        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
-        chart.draw(data, options);
-      }
-    </script>
+    var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+    chart.draw(data, options);
+  }
+</script>
     
 <div class="panel panel-default">
   <div class="panel-heading">
@@ -37,49 +37,49 @@
   <div class="panel-body">
     <div class="container" style="width: 100% !important;">    
       <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-          <% @accordian_data.each_with_index do |data,index| %>
+        <% @accordian_data.each_with_index do |data,index| %>
           <div class="panel panel-default demo">
-              <div class="panel-heading" role="tab" id="<%= index %>">
-                  <h4 class="panel-title">
-                      <a role="button" data-toggle="collapse" data-parent="#accordion" href="#<%= data[0].split(' ').join() %>" aria-expanded="true" aria-controls="<%= data[0] %>">
-                          <i class="move-right fa fa-plus"></i>
-                          <%= data[0] %> Todos
-                      </a>
-                  </h4>
-              </div>
-              <div id="<%= data[0].split(' ').join() %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="<%= index %>">
-                <div class="panel-body">
-                  <% if data[1].empty? %>
-                    <p class="no-data">
-                      Currently, there is no data to display.                      
-                    </p>
-                  <% else %>
-                    <table class="table table-bordered table-striped">
-                      <thead>
-                        <tr>
-                          <th class="center">Project</th>
-                          <th class="center">Task</th>
-                          <th class="center">Status</th>
-                          <th class="center">Developer</th>
-                        </tr>
-                      </thead>
+            <div class="panel-heading" role="tab" id="<%= index %>">
+              <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#<%= data[0].split(' ').join() %>" aria-expanded="true" aria-controls="<%= data[0] %>">
+                    <i class="move-right fa fa-plus"></i>
+                    <%= data[0] %> Todos
+                </a>
+              </h4>
+            </div>
+            <div id="<%= data[0].split(' ').join() %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="<%= index %>">
+              <div class="panel-body">
+                <% if data[1].empty? %>
+                  <p class="no-data">
+                    Currently, there is no data to display.                      
+                  </p>
+                <% else %>
+                  <table class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th class="center">Project</th>
+                        <th class="center">Task</th>
+                        <th class="center">Status</th>
+                        <th class="center">Developer</th>
+                      </tr>
+                    </thead>
 
-                      <tbody>
-                        <% data[1].each do |todo| %>
-                          <tr>
-                            <td class="center"><%= todo.project.name %></td>
-                            <td class="center"><%= todo.task %></td>
-                            <td class="center"><%= todo.status %></td>                
-                            <td class="center"><%= todo.developer.first_name %></td>
-                          </tr>
-                        <% end %>
-                      </tbody>
-                    </table>
-                  <% end %>
-                </div>
+                    <tbody>
+                      <% data[1].each do |todo| %>
+                        <tr>
+                          <td class="center"><%= todo.project.name %></td>
+                          <td class="center"><%= todo.task %></td>
+                          <td class="center"><%= todo.status %></td>                
+                          <td class="center"><%= todo.developer.first_name %></td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+                <% end %>
               </div>
+            </div>
           </div>
-          <% end %>          
+        <% end %>          
       </div><!-- panel-group -->        
     </div><!-- container -->
   </div>

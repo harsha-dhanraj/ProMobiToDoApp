@@ -1,5 +1,7 @@
 class ProjectsController < ApplicationController
+  
   include ProjectsHelper
+  
   before_action :authenticate_user!
 
   before_action :set_project, only: [:edit, :update, :destroy]

@@ -1,6 +1,8 @@
 class AnalyticsController < ApplicationController
+  
   before_action :authenticate_user!
-	authorize_resource :class => false
+	
+  authorize_resource :class => false
   
   def index
   	projects = current_user.projects.includes(:todos)

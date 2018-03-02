@@ -1,6 +1,9 @@
 class MyTodosController < ApplicationController
-	before_action :authenticate_user!
-	authorize_resource :class => false
+	
+  before_action :authenticate_user!
+	
+  authorize_resource :class => false
+  
   before_action :find_todo, :only => [:mark_as_done,:mark_as_in_progress]
 
 	def index
