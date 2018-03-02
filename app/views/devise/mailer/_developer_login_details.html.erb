@@ -1,0 +1,6 @@
+<% user = User.find(@resource.id) %>
+<% pass = Devise.friendly_token.first(8) %>
+<% user.update!( { :password => pass, :password_confirmation => pass }) %>
+<p> Your login details are as follows: </p>
+<p>Email: <%= @email %></p>
+<p>Password: <%= pass %></p>	

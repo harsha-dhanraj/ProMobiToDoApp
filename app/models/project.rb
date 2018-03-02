@@ -1,8 +1,11 @@
 class Project < ActiveRecord::Base
 	belongs_to :project_manager	
 	has_many :todos
-  	accepts_nested_attributes_for :todos, allow_destroy: true, reject_if: proc { |attributes| attributes['developer_id'].blank? }
-  	has_and_belongs_to_many :users
+	accepts_nested_attributes_for :todos, allow_destroy: true, reject_if: proc { |attributes| attributes['task'].blank? }
+	has_and_belongs_to_many :users
 
-  	validates_presence_of :name, :description, :client  	
+	validates :name, :description, :client, presence: true  	
+	validates :name, length: { maximum: 150 }
+	validates :client, length: { maximum: 150 }
+	validates :description, length: { maximum: 300 }
 end

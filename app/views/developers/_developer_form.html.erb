@@ -1,0 +1,28 @@
+<%= form_tag developers_path, :remote => true, :method => "POST", :class => "form-horizontal", :id=>"add-edit-developer-form" do  %>
+  <%= hidden_field_tag :project_manager_id, current_user.id  %>
+  <div class="form-group">
+    <label for="first_name" class="col-md-3 control-label">First Name</label>
+    <div class="col-md-6">                                        
+      <%= text_field_tag :first_name, (@developer.first_name rescue nil), autofocus: true, :class=>"form-control", :placeholder =>"First Name", :required => true %>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="last_name" class="col-md-3 control-label">Last Name</label>
+    <div class="col-md-6">                                        
+      <%= text_field_tag :last_name, (@developer.last_name rescue nil),  :class=>"form-control", :placeholder =>"Last Name", :required => true %>
+    </div>
+  </div>                                                
+  <div class="form-group">
+      <label for="email" class="col-md-3 control-label">Email</label>
+      <div class="col-md-6">                                        
+        <%= email_field_tag :email, (@developer.email rescue nil),  :class=>"form-control", :placeholder => "Email", :required => true %>
+      </div>
+  </div>
+  <div class="form-group">
+    <div class="col-md-offset-3 col-md-6">           
+      <%= button_tag "Save",:class=>"btn btn-info btn-trans btn-sm", :style => "margin-top:4px;", :data => {:disable_with => "Please Wait <i class='fa fa-spinner fa-spin'></i>".html_safe} do %>
+        <i class='fa fa-floppy-o'></i> <%= @developer.nil? ? ' Save' : ' Update' %>
+      <% end %>
+    </div>
+  </div>                                                              
+<% end %>

@@ -1,0 +1,47 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Todo List By Developer
+  </div>
+  <div class="panel-body">
+    <% if @status_data["Done"].empty? && @status_data["New"].empty? && @status_data["In Progress"].empty? %>
+      <p class="no-data">        
+        Currently, there is no data to display        
+      </p>
+    <% else %>      
+      <div id="table-scroll" class="table-scroll">
+        <div class="table-wrap">
+          <table class="table table-bordered table-striped main-table">
+            <thead>
+              <tr>
+                <th class="fixed-side align-center-middle">Status</th>
+                <% @user_ids.each do |id| %>
+                  <% u = current_user.developers.find(id) %>
+                  <th class="align-center-middle"><%= u.first_name %></th>
+                <% end %>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% @status_data.each do |k,v| %>
+                <tr>
+                  <td class="align-center-middle fixed-side"><%= k %></td> 
+                  <% @user_ids.each do |id| %>
+                    <td class="align-center-middle" title="<%= k %>">
+                    <% @status_data[k][id].each do |todo| %>
+                      <%= todo %>
+                      <% if todo != @status_data[k][id].last %>
+                      <hr>
+                      <% end %>
+                    <% end %>
+                    </td>            
+                  <% end %>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+    <% end %>
+  </div>
+</div>

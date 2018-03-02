@@ -1,0 +1,44 @@
+<% if @todos.empty? %>
+  <p class="no-data">
+    Currently, there are no pending tasks			    
+  </p>
+<% else %>
+	<div class="table-responsive">
+	  <table class="table table-bordered table-striped">
+	    <thead>
+	      <tr>
+	        <th class="center">Project</th>
+	        <th class="center">Task</th>
+	        <th class="center">Status</th>              
+	        <th colspan="3" class="center">Action</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <% @todos.each do |todo| %>
+	        <tr>
+	          <td class="center"><%= todo.project.name %></td>
+	          <td class="center"><%= todo.task %></td>
+	          <td class="center"><%= todo.status %></td>                
+	          <td class="center">	          	
+							<div class="btn-group">
+							  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							    Change Status <span class="caret"></span>
+							  </button>
+							  <ul class="dropdown-menu">
+					        <% if todo.status == "In Progress" %>
+							    <li><a href="<%= mark_as_done_my_todo_path(todo) %>" data-remote="true">Done</a></li>
+					        <% elsif todo.status == "Done" %>
+							    <li><a href="<%= mark_as_in_progress_my_todo_path(todo) %>" data-remote="true">In Progress</a></li>
+					        <% else %>
+					        <li><a href="<%= mark_as_done_my_todo_path(todo) %>" data-remote="true">Done</a></li>		
+					        <li><a href="<%= mark_as_in_progress_my_todo_path(todo) %>" data-remote="true">In Progress</a></li>			    
+					        <% end %>
+							  </ul>
+							</div>                                
+	          </td>
+	        </tr>
+	      <% end %>
+	    </tbody>
+	  </table>
+  </div>
+<% end %>

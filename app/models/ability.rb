@@ -7,12 +7,12 @@ class Ability
     #   user ||= User.new # guest user (not logged in)
       if user.type == "ProjectManager"
         puts "Project Manager"
-        cannot :manage, :developer
+        can :manage, :developer
         can :manage, Project
-        can :manage, :project_manager
+        can :manage, :analytic
       else
         puts "Developer"
-        can :manage, :developer
+        can :manage, :my_todo
         can :update, Todo, developer_id: user.id
       end
     #

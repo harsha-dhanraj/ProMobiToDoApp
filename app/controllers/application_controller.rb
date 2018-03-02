@@ -9,10 +9,11 @@ class ApplicationController < ActionController::Base
 
   rescue_from CanCan::AccessDenied do |exception|            
     if user_signed_in?
+      puts "Unauthorized Access"
       if current_user.type == "ProjectManager"
-        redirect_to projects_path, :alert => exception.message
+        redirect_to todo_list_developers_path, :alert => exception.message
       else
-        redirect_to developers_path, :alert => exception.message
+        redirect_to my_todos_path, :alert => exception.message
       end
     end
   end 
@@ -32,15 +33,14 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_up_path_for(resource)
-    projects_path
+    todo_list_developers_path
   end  
 
-  def after_sign_in_path_for(resource)
-    # vehicles_path # Or :prefix_to_your_route
+  def after_sign_in_path_for(resource)    
     if resource.type == "ProjectManager"
-      projects_path 
+      todo_list_developers_path 
     else
-      developers_path
+      my_todos_path
     end
   end
 

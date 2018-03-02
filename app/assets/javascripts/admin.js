@@ -15,4 +15,6 @@
 //= require twitter/bootstrap
 //= require jquery_nested_form
 //= require chosen-jquery
+//= require developers_todo_list
+//= require todos
 //= require scaffold

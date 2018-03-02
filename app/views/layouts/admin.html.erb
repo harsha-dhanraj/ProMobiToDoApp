@@ -48,10 +48,10 @@
 		<div class="container-fluid main-container">
 			<div class="col-md-2 sidebar">
 				<ul class="nav nav-pills nav-stacked">					
-					<li class="<%= 'active' if (controller?('projects') && action?('index')) %>"><%= link_to "Project Status", projects_path  %></li>
-					<li class="<%= 'active' if (controller?('projects') && (action?('new') || (action?('edit')))) %>"><%= link_to "Manage Projects", new_project_path,"data-no-turbolink" => true  %></li>
-					<li class="<%= 'active' if (controller?('project_managers') && action?('add_developer')) %>""><a href="<%= add_developer_project_managers_path %>">Manage Developers</a></li>
-					<li class="<%= 'active' if (controller?('projects') && action?('analytics')) %>"><a href="<%= analytics_projects_path %>">Analytics</a></li>					
+					<li class="<%= 'active' if (controller?('developers') && action?('todo_list')) %>"><%= link_to "Developers Todo List", todo_list_developers_path  %></li>
+					<li class="<%= 'active' if (controller?('projects') && (action?('index') || (action?('edit')))) %>"><%= link_to "Manage Projects", projects_path,"data-no-turbolink" => true  %></li>
+					<li class="<%= 'active' if (controller?('developers') && action?('index')) %>""><a href="<%= developers_path %>">Manage Developers</a></li>
+					<li class="<%= 'active' if (controller?('analytics') && action?('index')) %>"><a href="<%= analytics_path %>">Analytics</a></li>					
 				</ul>
 			</div>
 			<div class="spinner" style="width:100px;height: 100px;position: fixed;top: 50%;left: 50%;z-index: 99999999999;">

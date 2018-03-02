@@ -1,4 +1,4 @@
-Rails.application.routes.draw do  
+Rails.application.routes.draw do    
 
   devise_scope :user do
     root to: "devise/sessions#new"
@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   resources :projects do 
     collection do 
-      get 'analytics'
+      get 'analytics'      
     end
   end
 
@@ -20,16 +20,22 @@ Rails.application.routes.draw do
       post 'create_developer' 
       post 'update_developer'     
     end
-  end
+  end  
 
-  get 'developers/index'
+  resources :developers, :only => [:create,:edit, :update, :destroy, :index] do
+    collection do
+      get 'todo_list'
+    end
+  end   
 
-  resources :developers, :only => [:index] do    
+  resources :my_todos, :only => [:index] do
     member do
-      get 'change_status_to_done'      
-      get 'change_status_to_in_progress'
+      get 'mark_as_done'      
+      get 'mark_as_in_progress'
     end
   end
+
+  resources :analytics, :only => [:index]
 
   devise_for :users, :controllers => { :registrations => :registrations }
   # get 'welcome/index'

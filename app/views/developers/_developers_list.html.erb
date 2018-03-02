@@ -1,0 +1,40 @@
+<div class="developer-list">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Developers List
+    </div>
+    <div class="panel-body">
+      <% if @developers.empty? %>
+        <p class="no-data">
+          Currently, there are no developers          
+        </p>
+      <% else %>
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th class="center">First Name</th>
+              <th class="center">Last name</th>
+              <th class="center">Email</th>
+              <th colspan="3" class="center">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @developers.each do |developer| %>
+              <tr>
+                <td><%= developer.first_name %></td>
+                <td><%= developer.last_name %></td>
+                <td><%= developer.email %></td>
+                <td class="center">
+                <%= link_to "<i class='fa fa-pencil'></i> Edit".html_safe, edit_developer_path(developer), :title => "Edit", :class=>"btn btn-primary btn-sm", :remote => true %>
+                <%= link_to "<i class='fa fa-trash'></i> Delete".html_safe, developer, method: :delete, data: { confirm: 'Are you sure?' }, :title => "Delete", :class=>"btn btn-danger btn-sm", :remote => true %>                
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>    
+    </div>
+  </div>
+</div>
+
+

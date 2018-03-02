@@ -1,35 +1,28 @@
-<%= form_for(@project, :remote => true, :html=>{:class => "form-inline"}) do |f| %>
-  <% if @project.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
-
-      <ul>
-      <% @project.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<%= form_for(@project, :remote => true, :html=>{:class => "form-inline"}) do |f| %>  
+  <div class="col-md-6">    
+    <div class="form-group col-md-12 form-pad">    
+      <%= f.text_field :name, :class=>"form-control", :autofocus=>true,:maxlength=>"150", :placeholder => "Project Name", :style => "width:100%;", :required => true %>    
+    </div>    
+    <div class="form-group col-md-12 form-pad">
+      <%= f.text_field :client, :class=>"form-control", :placeholder => "Client Name", :style => "width:100%;", :required => true %>
+    </div>    
+  </div>
+  <div class="col-md-6">
+    <div class="form-group col-md-12 form-pad">    
+      <%= f.text_area :description, :class=>"form-control", :rows=>"4",:maxlength=>"300", :placeholder => "Project Description (Maximum 300 characters)", :style => "width:100%;", :required => true %>
     </div>
-  <% end %>
-  <div class="form-group col-md-3">
-    <!-- <label for="name">Name</label> -->
-    <%= f.text_field :name, :class=>"form-control", :placeholder => "Project Name", :style => "width:100%;", :required => true %>    
   </div>
-  <div class="form-group col-md-2">
-    <!-- <label for="description">Description</label> -->
-    <%= f.text_area :description, :class=>"form-control", :placeholder => "Project Description", :style => "width:100%;", :required => true %>
+  
+  <div class="col-md-12 top-margin">
+    <div class="form-group col-md-12" style="margin-left: -5px;">
+      <%= select_tag :developers, options_for_select(current_user.developers.map{|d| [d.name, d.id]}, :selected=>@project.users.pluck(:id)),{:multiple => true, :prompt => "Please Select",:class=>"chosen-select form-control" } %>
+    </div>
   </div>
-  <div class="form-group col-md-3">
-    <!-- <label for="client">Client</label> -->
-    <%= f.text_field :client, :class=>"form-control", :placeholder => "Client Name", :style => "width:100%;", :required => true %>
+  <div class="col-md-offset-6 col-md-6 top-margin">
+    <div class="actions form-group">  
+      <%= f.button "Save", :class=>"btn btn-primary btn-sm", :data => {disable_with: "<i class='fa fa-spinner fa-spin'></i>".html_safe } do%>
+       <i class='fa fa-floppy-o'></i><%= @project.new_record? ? ' Save' : ' Update' %>
+      <% end %>
+    </div>
   </div>
-  <div class="form-group col-md-3">
-    <%= select_tag :developers, options_for_select(current_user.developers.map{|d| [d.name, d.id]}, :selected=>@project.users.pluck(:id)),{:multiple => true, :prompt => "Please Select",:class=>"chosen-select form-control" } %>
-  </div>
-  <div class="actions form-group col-md-1">
-    <%#= f.submit "#{@project.new_record? ? 'Save' : 'Update'}", :class => "btn btn-primary btn-sm" %>
-    <%= f.button "Save", :class=>"btn btn-primary btn-sm", :data => {disable_with: "<i class='fa fa-spinner fa-spin'></i>".html_safe } do%>
-     <i class='fa fa-floppy-o'></i><%= @project.new_record? ? ' Save' : ' Update' %>
-    <% end %>
-  </div>
-  <!-- <button type="submit" class="btn btn-default">Submit</button> -->
 <% end %>

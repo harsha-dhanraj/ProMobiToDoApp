@@ -1,0 +1,5 @@
+// alert("hello from edit developer")
+$('.add-edit-developer').text('Edit Developer')
+$('.developer-form').html("<%= j render 'developer_form' %>")
+$('.developer-form #add-edit-developer-form').attr('action', "<%= developer_path %>");
+$('.developer-form #add-edit-developer-form').attr('method', "PATCH");

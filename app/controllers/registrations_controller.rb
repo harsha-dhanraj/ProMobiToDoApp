@@ -4,9 +4,9 @@ class RegistrationsController < Devise::RegistrationsController
 
     def after_update_path_for(resource)
 	    if resource.type == "ProjectManager"
-	      projects_path 
+	      todo_list_developers_path 
 	    else
-	      developers_path
+	      my_todos_path
 	    end
 	  end
 end

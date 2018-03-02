@@ -13,5 +13,6 @@
  *= require bootstrap_and_overrides
  *= require font-awesome
  *= require chosen
+ *= require common
  *= require_self
  */

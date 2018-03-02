@@ -1,0 +1,46 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Todo List By Project
+  </div>
+  <div class="panel-body">
+    <% if @project_status_data["Done"].empty? && @project_status_data["New"].empty? && @project_status_data["In Progress"].empty? %>
+      <p class="no-data">        
+        Currently, there is no data to display        
+      </p>
+    <% else %>
+      <div id="table-scrolll" class="table-scrolll">
+        <div class="table-wrap">
+          <table class="table table-bordered table-striped main-table-1">
+        <thead>
+          <tr>
+            <th class="align-center-middle fixed-side">Status</th>
+            <% @project_ids.each do |id| %>
+              <% p = current_user.projects.find(id) %>
+              <th class="align-center-middle"><%= p.name %></th>
+            <% end %>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @project_status_data.each do |k,v| %>
+            <tr>
+              <td class="align-center-middle fixed-side"><%= k %></td> 
+              <% @project_ids.each do |id| %>
+                <td class="align-center-middle" title="<%= k %>">
+                <% @project_status_data[k][id].each do |todo| %>
+                  <%= todo %>
+                  <% if todo != @project_status_data[k][id].last %>
+                  <hr>
+                  <% end %>
+                <% end %>
+                </td>            
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      </div>
+      </div>
+    <% end %>
+  </div>
+</div>

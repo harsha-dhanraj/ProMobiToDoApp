@@ -1,12 +1,12 @@
-<% if @error %>
-	alert("<%= @message %>")
+<% if @error_message.nil? %>	
+	alert("Project updated successfully")	
+	$('.project-list').html("<%= j render 'index' %>");
+	$('.project-list #developers').chosen({
+		width: '100%'
+	});
+	$('.project-list #project_name').val('')
+	$('.project-list #project_description').val('')
+	$('.project-list #project_client').val('')
 <% else %>
-alert("Project Updated Successfully")	
-$('.project-list').html("<%= j render 'index' %>");
-$('.project-list #developers').chosen({
-	width: '200px'
-});
-$('.project-list #project_name').val('')
-$('.project-list #project_description').val('')
-$('.project-list #project_client').val('')
+	alert("<%= @error_message %>")
 <% end %>

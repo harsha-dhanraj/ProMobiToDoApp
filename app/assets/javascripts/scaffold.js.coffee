@@ -4,7 +4,7 @@ $ ->
     allow_single_deselect: true
     no_results_text: 'No results matched'
     placeholder_text_multiple: 'Select Developers'
-    width: '200px'
+    width: '100%'
 
   $('.chosen-select-single').chosen
     allow_single_deselect: true
