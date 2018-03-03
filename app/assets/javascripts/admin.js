@@ -17,4 +17,6 @@
 //= require chosen-jquery
 //= require developers_todo_list
 //= require todos
+//= require bootbox
+//= require confirm
 //= require scaffold

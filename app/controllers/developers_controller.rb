@@ -1,6 +1,8 @@
 class DevelopersController < ApplicationController
 	
   include DevelopersHelper
+  
+  include ApplicationHelper
 
   before_action :authenticate_user!
 
@@ -14,8 +16,9 @@ class DevelopersController < ApplicationController
 
   def create        
     @developer = Developer.new(developer_params)    
-    @developer.save(:validate => false)
-    @developers = current_user.developers 
+    @developer.project_manager_id = current_user.id          
+    @developer.save(:validate => false) if valid_developer?      
+    @developers = current_user.developers
 
     respond_to do |format|
       format.js { render :create }
@@ -27,13 +30,12 @@ class DevelopersController < ApplicationController
   end
 
   def update           
-    old_email = @developer.email     
-    if @developer.update(developer_params)
-      current_email = @developer.email
-      send_confirmation_email_to_developer(old_email,current_email)        
-      @developers = current_user.developers      
-    else
-      puts "Error ocurred"
+    old_email = @developer.email    
+    @developer.attributes = developer_params
+    if valid_developer?     
+      @developer.update(developer_params)  
+      # If email is changed then send again the confirmation email
+      @developer.send_confirmation_instructions if old_email != @developer.email    
     end
 
     respond_to do |format|
@@ -42,11 +44,11 @@ class DevelopersController < ApplicationController
   end
 
   def destroy        
-    @developer.destroy
-    @developers = current_user.developers
+    @developer.destroy 
 
     respond_to do |format|
       format.js
+      format.json {render :json => true}
     end
   end
 
@@ -54,7 +56,8 @@ class DevelopersController < ApplicationController
     @projects = current_user.projects.includes(:todos)    
     @status_data = {}
     @project_status_data = {}
-    generate_graph_data
+    # Generate data to be displayed in required format
+    generate_data #DevelopersHelper
 
     respond_to do |format|
       format.html
@@ -65,7 +68,9 @@ class DevelopersController < ApplicationController
   private
 
     def set_developer
-      @developer = current_user.developers.find(params[:id])
+      @developers = current_user.developers 
+      @developer = @developers.find(params[:id])
+      
     end
 
     def developer_params

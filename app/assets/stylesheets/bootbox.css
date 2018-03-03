@@ -1,0 +1,27 @@
+.bootbox .modal-content {
+  box-shadow: none;
+  border-radius: 6px !important; 
+  border: none !important; 
+}
+
+.bootbox .modal-header {
+  min-height: 16.43px;
+  padding: 15px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  background-color: #DA5F6A;
+}
+
+.bootbox .modal-title {
+	color: white;
+}
+
+.bootbox .modal-footer {
+	text-align: center;
+}
+
+.bootbox h4 {
+	font-size: 1.238em !important;
+}

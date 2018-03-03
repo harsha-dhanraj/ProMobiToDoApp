@@ -22,6 +22,7 @@ gem "nested_form"
 gem 'chosen-rails'
 gem 'cancancan', '~> 1.10'
 gem 'figaro'
+gem 'bootbox-rails', '~>0.4'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

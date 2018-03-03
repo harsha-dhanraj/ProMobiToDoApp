@@ -1,4 +1,9 @@
-$('.developers-list').html("<%= j render 'developers_list' %>")
-$(".developer-form #first_name").val('')
-$(".developer-form #last_name").val('')
-$(".developer-form #email").val('')
+<% if @message.nil? %>
+	bootbox.alert({size: "small",title: "<i class='fa fa-check'></i> Success!",message: "Developer created successfully!"}).find('.modal-header').css({"background-color":"#1AAF5D"});
+	$('.developers-list').html("<%= j render 'developers_list' %>")
+	$(".developer-form #first_name").val('')
+	$(".developer-form #last_name").val('')
+	$(".developer-form #email").val('')
+<% else %>
+	bootbox.alert({size: "small",title: "<i class='fa fa-exclamation-triangle'></i> Please Review",message: "<%= @message %>"});
+<% end %>

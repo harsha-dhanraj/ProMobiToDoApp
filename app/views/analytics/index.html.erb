@@ -6,7 +6,7 @@
     var data = google.visualization.arrayToDataTable(<%= raw @data.to_json %>);
 
     var options = {
-      title: 'Project Status',
+      title: 'Status of all Todos',
       is3D: true,
       pieSliceText: 'label',             
     };
@@ -18,7 +18,7 @@
     
 <div class="panel panel-default">
   <div class="panel-heading">
-    Project Status
+    Todo Status
   </div>
   <div class="panel-body">
     <% if (@data[1][1] == 0) && (@data[2][1] == 0) && (@data[3][1] == 0) %>

@@ -15,18 +15,20 @@
               <th class="center">First Name</th>
               <th class="center">Last name</th>
               <th class="center">Email</th>
+              <th class="center">Project Manager</th>
               <th colspan="3" class="center">Action</th>
             </tr>
           </thead>
           <tbody>
             <% @developers.each do |developer| %>
               <tr>
-                <td><%= developer.first_name %></td>
-                <td><%= developer.last_name %></td>
-                <td><%= developer.email %></td>
+                <td class="center"><%= developer.first_name %></td>
+                <td class="center"><%= developer.last_name %></td>
+                <td class="center"><%= developer.email %></td>
+                <td class="center"><%= developer.project_manager.name %></td>
                 <td class="center">
                 <%= link_to "<i class='fa fa-pencil'></i> Edit".html_safe, edit_developer_path(developer), :title => "Edit", :class=>"btn btn-primary btn-sm", :remote => true %>
-                <%= link_to "<i class='fa fa-trash'></i> Delete".html_safe, developer, method: :delete, data: { confirm: 'Are you sure?' }, :title => "Delete", :class=>"btn btn-danger btn-sm", :remote => true %>                
+                <%= link_to "<i class='fa fa-trash'></i> Delete".html_safe, "#", :onclick => "confirm('developer',#{developer.id},this)", :title => "Delete", :class=>"btn btn-danger btn-sm" %>                
                 </td>
               </tr>
             <% end %>

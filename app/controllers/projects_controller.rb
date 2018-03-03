@@ -1,6 +1,8 @@
 class ProjectsController < ApplicationController
   
   include ProjectsHelper
+
+  include ApplicationHelper
   
   before_action :authenticate_user!
 
@@ -9,8 +11,7 @@ class ProjectsController < ApplicationController
   load_and_authorize_resource
 
   def index    
-    @projects = current_user.projects
-    @project = Project.new
+    get_project_list
 
     respond_to do |format|
       format.html
@@ -26,7 +27,7 @@ class ProjectsController < ApplicationController
   end  
 
   def edit
-    @projects = Project.all
+    @projects = current_user.projects
 
     respond_to do |format|      
       format.js
@@ -36,12 +37,11 @@ class ProjectsController < ApplicationController
 
   def create
     @project = current_user.projects.new(project_params)    
-    update_project_assignment    
+    update_project_assignment #ProjectsHelper   
     if @project.save
-      @projects = current_user.projects
-      @project = Project.new
+      get_project_list
     else
-      @error_message = "Some error occurred. Ensure all fields are correctly filled."
+      prepare_error_message(@project.errors.full_messages)
     end
     
     respond_to do |format|      
@@ -51,24 +51,23 @@ class ProjectsController < ApplicationController
 
   def update           
     update_project_assignment
-    if @project.update(project_params)      
-      @projects = current_user.projects
-      @project = Project.new          
-    else      
-      @error_message = "Some error occurred.Ensure all fields are correctly filled and no duplicate tasks are being created"
+    if @project.update(project_params)
+      get_project_list            
+    else        
+      prepare_error_message(@project.errors.full_messages)
     end    
+    
     respond_to do |format|      
-      format.js
-      format.html { redirect_to :back}
+      format.js      
     end
   end
 
   def destroy
-    @project.destroy
-    @projects = current_user.projects
-    @project = Project.new    
+    @project.destroy    
+
     respond_to do |format|      
       format.js
+      format.json {render :json => true}
     end
   end
 

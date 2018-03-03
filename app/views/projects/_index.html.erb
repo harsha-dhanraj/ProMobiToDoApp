@@ -29,12 +29,12 @@
           <tbody>
             <% @projects.each do |project| %>
               <tr>
-                <td class="center"><%= project.name %></td>
+                <td class="center" nowrap><%= project.name %></td>
                 <td class="center"><%= project.description %></td>
-                <td class="center"><%= project.client %></td>
-                <td class="center">
+                <td class="center" nowrap><%= project.client %></td>
+                <td class="center" nowrap>
                 <%= link_to "<i class='fa fa-pencil'></i> Edit".html_safe, edit_project_path(project), :title => "Edit", :class=>"btn btn-primary btn-sm", :remote => true %>
-                <%= link_to "<i class='fa fa-trash'></i> Delete".html_safe, project, method: :delete, data: { confirm: 'Are you sure?' }, :title => "Delete", :class=>"btn btn-danger btn-sm", :remote => true %>
+                <%= link_to "<i class='fa fa-trash'></i> Delete".html_safe, "#", :onclick => "confirm('project',#{project.id},this)", :title => "Delete", :class=>"btn btn-danger btn-sm", :remote => true %>
                 <% if !project.users.empty? %>
                 <%= link_to "<i class='fa fa-list'></i> Manage ToDo".html_safe, edit_project_path(project), :title => "Edit", :class=>"btn btn-primary btn-sm", :target=> "_blank" %>
                 <% end %>

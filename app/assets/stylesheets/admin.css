@@ -15,5 +15,6 @@
  *= require chosen
  *= require developers_todo_list
  *= require common
+ *= require bootbox
  *= require_self
  */

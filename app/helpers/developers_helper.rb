@@ -1,11 +1,27 @@
 module DevelopersHelper
-	def send_confirmation_email_to_developer(old_email,current_email)		   
-		@developer.send_confirmation_instructions if old_email != current_email      
-	end
 
-	def generate_graph_data
+  def valid_developer?
+    valid = true
+    if !@developer.valid?
+      puts "#{@developer.errors.full_messages}"
+      errors = @developer.errors.full_messages-["Password can't be blank"]
+      if !errors.empty?
+        prepare_error_message(errors) 
+        valid = false
+      end
+    else
+      puts "*************************"
+    end
+    return valid
+  end
+
+	# def send_confirmation_email_to_developer(old_email,current_email)		   
+		
+	# end
+
+	def generate_data
 		@developers = current_user.developers.includes(:todos)
-    ["New","Done","In Progress"].each do |status|
+    Todo::STATUS.each do |status|
       @status_data[status] = {}
       @developers.each do |developer|
         @status_data[status][developer.id] = []
@@ -37,4 +53,5 @@ module DevelopersHelper
     @user_ids = @user_ids.flatten.reject(&:blank?).uniq
     @project_ids = @project_ids.flatten.reject(&:blank?).uniq
 	end
+  
 end

@@ -33,7 +33,7 @@
 					<ul class="nav navbar-nav navbar-right">						
 						<li class="dropdown ">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-								<%= current_user.name %> (<%= current_user.type %>)
+								<%= current_user.name %> (<%= (current_user.type.split /(?=[A-Z])/).join(' ') %>)
 								<span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
 								<li class=""><a href="<%= edit_user_registration_path %>">Change Password</a></li>
@@ -49,8 +49,8 @@
 			<div class="col-md-2 sidebar">
 				<ul class="nav nav-pills nav-stacked">					
 					<li class="<%= 'active' if (controller?('developers') && action?('todo_list')) %>"><%= link_to "Developers Todo List", todo_list_developers_path  %></li>
-					<li class="<%= 'active' if (controller?('projects') && (action?('index') || (action?('edit')))) %>"><%= link_to "Manage Projects", projects_path,"data-no-turbolink" => true  %></li>
 					<li class="<%= 'active' if (controller?('developers') && action?('index')) %>""><a href="<%= developers_path %>">Manage Developers</a></li>
+					<li class="<%= 'active' if (controller?('projects') && (action?('index') || (action?('edit')))) %>"><%= link_to "Manage Projects", projects_path,"data-no-turbolink" => true  %></li>					
 					<li class="<%= 'active' if (controller?('analytics') && action?('index')) %>"><a href="<%= analytics_path %>">Analytics</a></li>					
 				</ul>
 			</div>

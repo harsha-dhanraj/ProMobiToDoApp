@@ -1,5 +1,5 @@
-<% if @error_message.nil? %>	
-	alert("Project updated successfully")	
+<% if @message.nil? %>		
+	bootbox.alert({size: "small",title: "<i class='fa fa-check'></i> Success!",message: "Project updated successfully!"}).find('.modal-header').css({"background-color":"#1AAF5D"});
 	$('.project-list').html("<%= j render 'index' %>");
 	$('.project-list #developers').chosen({
 		width: '100%'
@@ -7,6 +7,6 @@
 	$('.project-list #project_name').val('')
 	$('.project-list #project_description').val('')
 	$('.project-list #project_client').val('')
-<% else %>
-	alert("<%= @error_message %>")
+<% else %>	
+	bootbox.alert({size: "small",title: "<i class='fa fa-exclamation-triangle'></i> Please Review",message: "<%= @message %>"});
 <% end %>

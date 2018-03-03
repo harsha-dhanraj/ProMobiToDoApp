@@ -1,5 +1,11 @@
 class Todo < ActiveRecord::Base
+	
 	belongs_to :developer, :class_name => "User"
+
 	belongs_to :project
-	validates_uniqueness_of :task, :scope => :project_id		
+
+	validates_uniqueness_of :task, :scope => :project_id
+
+	STATUS = ["New", "Done", "In Progress"]		
+
 end

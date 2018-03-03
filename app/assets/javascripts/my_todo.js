@@ -15,4 +15,5 @@
 //= require twitter/bootstrap
 //= require jquery_nested_form
 //= require chosen-jquery
+//= require bootbox
 //= require scaffold

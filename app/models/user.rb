@@ -5,9 +5,12 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
   has_many :developers, :class_name => "User", foreign_key: "project_manager_id"
+  
   belongs_to :project_manager
   
   has_and_belongs_to_many :projects
+
+  validates_uniqueness_of :email
 
 
 
