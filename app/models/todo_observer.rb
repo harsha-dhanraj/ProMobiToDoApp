@@ -4,7 +4,7 @@ class TodoObserver < ActiveRecord::Observer
   		if todo.status_was != "Done"  			  	
     		DeveloperMailer.nofify_of_todo_assignment(todo).deliver    		
     		old_developer = Developer.find(todo.developer_id_was)
-    		DeveloperMailer.nofify_of_todo_unassignment(old_developer,todo).deliver
+    		DeveloperMailer.nofify_of_todo_unassignment(old_developer,todo).deliver if old_developer != todo.developer
     	end    	
     end    
   end

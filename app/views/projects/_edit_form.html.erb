@@ -1,7 +1,6 @@
 <div class="row" style="margin-left: 24px;margin-bottom: 10px;">
 <div class="col-md-8 alert alert-warning" style="margin-top: 10px;">
-  <p style="font-size:14px;"><b>Note: </b> You can add any number of todos for this project by clicking on <code>Add a Todo</code> button. Once all todos are added, click <code>Update</code> button and you are done.<br/>
-  Remember, you can't remove the todos having status other than <code>New</code>.
+  <p style="font-size:14px;"><b>Note: </b> You can add any number of todos for this project by clicking on <code>Add a Todo</code> button. Once all todos are added, click <code>Update</code> button and you are done.<br/>  
   </p>
 </div>
 </div>
@@ -10,23 +9,13 @@
     <%= task_form.hidden_field :project_id, :value => @project.id %>
     <div class="row" style="margin-left: 10px;">
       <div class="form-group col-md-4">
-        <%= task_form.text_field :task, :class =>"form-control task", :title=> "Todo Name", :style => "width:100%", :required => true %>
+        <%= task_form.text_field :task, :class =>"form-control task", :title=> "Task Name", :style => "width:100%", :required => true %>
       </div>
       <div class="form-group col-md-4">      
-        <%= task_form.select :developer_id, options_for_select(@project.users.map{|d| [d.name, d.id]}, :selected=>task_form.object.developer_id),{:prompt => "Please Select"}, {:class=>"chosen-select-single form-control", :id=>"developerId", :style => "width:100%", :disabled => task_form.object.done?}  %>
+        <%= task_form.select :developer_id, options_for_select(@project.users.map{|d| [d.name, d.id]}, :selected=>task_form.object.developer_id),{:prompt => "Please Select"}, {:class=>"chosen-select-single form-control", :id=>"developerId", :style => "width:100%"}  %>
       </div>
       <div class="form-group col-md-4">
-        <% if task_form.object.new? %>    
-          <label class="label control-label label-info" title="Status">New</label>      
-          <label class="label control-label label-danger"><%= task_form.link_to_remove "<i class='fa fa-times'></i>".html_safe, :title => "Remove this todo", :style =>"color:white;" %></label>
-        <% else %>
-          <% if task_form.object.done? %>
-            <label class="label control-label label-success" title="Status">Done</label>
-          <% else %>
-            <label class="label control-label label-warning" title="Status">In Progress</label>
-          <% end %>
-          <label class="label control-label label-danger"><%= task_form.link_to_remove "<i class='fa fa-times'></i>".html_safe, :title => "Remove this todo", :style =>"color:white;" %></label>
-        <% end %>
+        <%= task_form.link_to_remove "<i class='fa fa-times'></i>".html_safe,:class =>"btn btn-danger btn-sm remove", :title => "Remove this task" %>
       </div>
     </div>
   <% end %>

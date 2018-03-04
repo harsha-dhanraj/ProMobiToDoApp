@@ -14,7 +14,6 @@ class Todo < ActiveRecord::Base
 
 	STATUS = ["New", "Done", "In Progress"]	
 
-
 	STATUS.each do |status|
 	  define_method("#{status.downcase.split(' ').join('_')}?") do 
 			self.status == status
