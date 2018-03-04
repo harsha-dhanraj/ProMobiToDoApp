@@ -1,0 +1,21 @@
+<p style="line-height: 20px;">
+	Hi <%= @developer.name %>,<br/>
+	You have been assigned to the following todo:
+</p>
+<p>
+	<table cellspacing="0" cellpadding="10" border="1">
+	  <thead>
+	    <tr>                                 
+	      <th>Project</th>  
+	      <th>Todo</th>	      
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr>
+	    	<td><%= @todo.project.name %></td>
+	    	<td><%= @todo.task %></td>
+	    </tr>
+	    
+	  </tbody>
+	</table>
+</p>

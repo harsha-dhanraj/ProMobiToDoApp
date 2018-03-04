@@ -1,5 +1,5 @@
-class Project < ActiveRecord::Base
-	
+class Project < ActiveRecord::Base	
+
 	belongs_to :project_manager	
 
 	has_many :todos, dependent: :destroy

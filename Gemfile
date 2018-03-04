@@ -23,6 +23,7 @@ gem 'chosen-rails'
 gem 'cancancan', '~> 1.10'
 gem 'figaro'
 gem 'bootbox-rails', '~>0.4'
+gem 'rails-observers'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

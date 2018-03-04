@@ -2,6 +2,8 @@ module DevelopersHelper
 
   def valid_developer?
     valid = true
+    @developer.attributes = developer_params
+    @developer.project_manager_id = current_user.id          
     if !@developer.valid?
       puts "#{@developer.errors.full_messages}"
       errors = @developer.errors.full_messages-["Password can't be blank"]

@@ -1,2 +1,6 @@
-bootbox.alert({size: "small",title: "<i class='fa fa-check'></i> Success!",message: "Todo marked as <b>In Progress</b> successfully!"}).find('.modal-header').css({"background-color":"#1AAF5D"});
-$('.todolist').html("<%= j render 'todo' %>")
+<% if @error %>
+	bootbox.alert({size: "small",title: "<i class='fa fa-exclamation-triangle'></i> Please Review",message: "This todo is no longer assigned to you"});
+<% else %>
+	bootbox.alert({size: "small",title: "<i class='fa fa-check'></i> Success!",message: "Todo marked as <b>In Progress</b> successfully!"}).find('.modal-header').css({"background-color":"#1AAF5D"});
+	$('.todolist').html("<%= j render 'todo' %>")
+<% end %>

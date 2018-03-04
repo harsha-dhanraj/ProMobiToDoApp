@@ -15,8 +15,7 @@ class DevelopersController < ApplicationController
   end  
 
   def create        
-    @developer = Developer.new(developer_params)    
-    @developer.project_manager_id = current_user.id          
+    @developer = Developer.new
     @developer.save(:validate => false) if valid_developer?      
     @developers = current_user.developers
 
@@ -29,14 +28,8 @@ class DevelopersController < ApplicationController
     
   end
 
-  def update           
-    old_email = @developer.email    
-    @developer.attributes = developer_params
-    if valid_developer?     
-      @developer.update(developer_params)  
-      # If email is changed then send again the confirmation email
-      @developer.send_confirmation_instructions if old_email != @developer.email    
-    end
+  def update                            
+    @developer.update(developer_params)  if valid_developer?    
 
     respond_to do |format|
       format.js
